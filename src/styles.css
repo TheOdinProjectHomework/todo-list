@@ -2,3 +2,13 @@
     box-sizing: border-box;
     margin: 0;
 }
+
+main {
+    display: grid;
+    grid-template-columns: repeat(2, 25% 75%);
+}
+
+/* todo Card */
+.todoCard {
+    border: 1px solid black;
+}

@@ -9,5 +9,38 @@
     <header>
         <h1>Todo List Project</h1>
     </header>
+    <main>
+        <section id="projectSection">
+            <div>
+                <form id="newProjectForm">
+                    <p>+ Add new project +</p>
+                    <input type="text" id="projectTitle" placeholder="Project Name"/>
+                    <input type="submit"/>
+                </form>
+            </div>
+            <div id="projects"></div>
+        </section>
+        <section id="todosSection">
+            <div>
+                <p>+ add new to-do +</p>
+                <form id="newTodoForm">
+                    <input type="text" placeholder="Title" id="fTitle" required/>
+                    <input type="text" placeholder="Description" id="fDescription" required/>
+                    <input type="date" id="fDate" required/>
+                    <fieldset>
+                        <legend>Priority level:</legend>
+                        <input type="radio" id="fLow" name="priority" value="low">
+                        <label for="fLow">Low</label><br>
+                        <input type="radio" id="fMedium" name="priority" value="medium">
+                        <label for="fMedium">Medium</label><br>
+                        <input type="radio" id="fHigh" name="priority" value="high">
+                        <label for="fHigh">High</label><br>
+                    </fieldset>
+                    <input type="submit"/>
+                </form>
+            </div>
+            <div id="newTodo"></div>
+        </section>
+    </main>
 </body>
 </html>
