@@ -5,6 +5,7 @@ console.log("Webpack is running: npx webpack serve");
 // Global Variables
 let allProjects = [];
 let allTodos = [];
+let currentProject = 'default';
 
 // class module //
 class Project {
@@ -28,6 +29,11 @@ class Project {
 
     addTodo (todo) {
         this._todos.push(todo);
+    }
+
+    deleteTodo (todoToDelete) {
+        let updatedTodos = this._todos.filter(todo => todo !== todoToDelete);
+        this._todos = [...updatedTodos];
     }
 }
 
@@ -71,10 +77,13 @@ const todoCard = (title, description, dueDate, priority) => {
     let descP = document.createElement('p');
     descP.textContent = description;
     let date = document.createElement('p');
+    let deleteBtn = document.createElement('button');
+    deleteBtn.textContent = 'X';
     date.textContent = dueDate;
     divCard.appendChild(titleH4);
     divCard.appendChild(descP);
     divCard.appendChild(date);
+    divCard.appendChild(deleteBtn);
     if(priority === "low"){
         divCard.style.border = "1px solid yellow";
     } else if(priority === "medium"){
@@ -82,11 +91,24 @@ const todoCard = (title, description, dueDate, priority) => {
     } else {
         divCard.style.border = "1px solid red";
     }
+    // delete logic
+    deleteBtn.addEventListener("click", () => {
+        let thisTodo = allTodos.find(todo => todo.title === title);
+        console.log("deleteBtn clicked: " + thisTodo.title);
+        if(!thisTodo) {
+            console.log("Todo not found");
+            return;
+        }
+        let project = allProjects.find(project => project.title === currentProject);
+        project.deleteTodo(thisTodo);
+        loadTodos(project.todos, project.title);
+    })
     return divCard;
 }
 
 const projectCard = (title) => {
     let divCard = document.createElement('div');
+    divCard.className = 'projectCard';
     let titleP = document.createElement('p');
     titleP.innerText = title;
     divCard.appendChild(titleP);
@@ -95,26 +117,40 @@ const projectCard = (title) => {
 
 // object creation logic //
 let testProject = new Project('default', 'testing class');
+let completedProjects = new Project('completed', 'Completed tasks');
 let todo1 = new Todo('shower', 'take shower', new Date, 'low', false);
 console.log(testProject);
 console.log(todo1);
 testProject.addTodo(todo1);
 console.log(testProject);
-allProjects.push(testProject);
+allProjects.push(testProject, completedProjects);
 allTodos.push(todo1);
 
 // form post logic
 let form = document.getElementById('newTodoForm');
+let projectSelect = document.getElementById('projectOption');
+const projectMenu = () => {
+    allProjects.forEach((option) => {
+    let optionValue = document.createElement('option');
+    optionValue.textContent = option.title;
+    optionValue.value = option.title;
+    projectSelect.appendChild(optionValue);
+})}
+
 form.addEventListener('submit', (e) => {
     e.preventDefault();
+    console.log(`Selected Project: ${projectSelect.value}`);
     let title = document.getElementById('fTitle');
     let description = document.getElementById('fDescription');
     let dueDate = document.getElementById('fDate');
     let priority = document.querySelector('input[name="priority"]:checked');
     let newTodo = new Todo(title.value, description.value, dueDate.value, priority.value);
+    let selected = allProjects.find(project => project.title === projectSelect.value);
+    selected.addTodo(newTodo);
+    console.log(selected);
     allTodos.push(newTodo);
-    todosDiv.innerHTML = "";
-    loadTodos();
+    // todosDiv.innerHTML = "";
+    loadTodos(selected.todos, selected.title);
     console.log(newTodo);
 })
 
@@ -126,6 +162,8 @@ projectForm.addEventListener("submit", (e) => {
     allProjects.push(newProject);
     projectsDiv.innerHTML = "";
     loadProjects();
+    projectSelect.innerHTML = "";
+    projectMenu();
 });
 
 // index logic //
@@ -136,16 +174,32 @@ console.log(allProjects);
 const loadProjects = () => {
     allProjects.forEach((project) => {
         let p = projectCard(project.title);
+        p.addEventListener('click', () => {
+            loadTodos(project.todos, project.title);
+            currentProject = project.title;
+            console.log(`current project: ${currentProject}`);
+        })
         projectsDiv.appendChild(p);
     })
 }
 
-const loadTodos = () => {
-    allTodos.forEach((todo) => {
-        let x = todoCard(todo.title, todo.description, todo.dueDate, todo.priority);
-        todosDiv.appendChild(x);
-    })
+const loadTodos = (array, name) => {
+    let nameh4 = document.getElementById('project-name');
+    nameh4.textContent = name;
+    todosDiv.innerHTML = '';
+    if(!array || array.length < 1) {
+        let errorMsg = document.createElement('p');
+        errorMsg.textContent = 'No to-dos found';
+        todosDiv.appendChild(errorMsg);
+    } else {
+        array.forEach((todo) => {
+            let x = todoCard(todo.title, todo.description, todo.dueDate, todo.priority);
+            todosDiv.appendChild(x);
+        })
+    }
 }
 
+console.log(`current project: ${currentProject}`);
 loadProjects();
-loadTodos();
+loadTodos(testProject.todos, testProject.title);
+projectMenu();
