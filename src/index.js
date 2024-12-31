@@ -78,11 +78,14 @@ const todoCard = (title, description, dueDate, priority) => {
     descP.textContent = description;
     let date = document.createElement('p');
     let deleteBtn = document.createElement('button');
+    let checkBtn = document.createElement('button');
+    checkBtn.textContent = 'O';
     deleteBtn.textContent = 'X';
     date.textContent = dueDate;
     divCard.appendChild(titleH4);
     divCard.appendChild(descP);
     divCard.appendChild(date);
+    divCard.appendChild(checkBtn);
     divCard.appendChild(deleteBtn);
     if(priority === "low"){
         divCard.style.border = "1px solid yellow";
@@ -90,6 +93,23 @@ const todoCard = (title, description, dueDate, priority) => {
         divCard.style.border = "1px solid green";
     } else {
         divCard.style.border = "1px solid red";
+    }
+    // check logic
+    checkBtn.addEventListener("click", () => {
+        console.log("checkBtn clicked");
+        let thisTodo = allTodos.find(todo => todo.title === title);
+        let completed = allProjects.find(project => project.title === 'completed');
+        completed.addTodo(thisTodo);
+        // delete replicated logic, update later 
+        let project = allProjects.find(project => project.title === currentProject);
+        project.deleteTodo(thisTodo);
+        loadTodos(project.todos, project.title);
+    })
+    //logic to display or hide check btn
+    if(currentProject === 'completed') {
+        checkBtn.style.display = 'none';
+    } else {
+        checkBtn.style.display = 'inline';
     }
     // delete logic
     deleteBtn.addEventListener("click", () => {
@@ -175,8 +195,8 @@ const loadProjects = () => {
     allProjects.forEach((project) => {
         let p = projectCard(project.title);
         p.addEventListener('click', () => {
-            loadTodos(project.todos, project.title);
             currentProject = project.title;
+            loadTodos(project.todos, project.title);
             console.log(`current project: ${currentProject}`);
         })
         projectsDiv.appendChild(p);
