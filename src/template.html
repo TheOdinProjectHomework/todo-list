@@ -7,13 +7,13 @@
 </head>
 <body>
     <header>
-        <h1>Todo List Project</h1>
+        <h1>To-do List Project</h1>
     </header>
     <main>
         <section id="projectSection">
             <div>
                 <form id="newProjectForm">
-                    <p>+ Add new project +</p>
+                    <p>+ Add New Project +</p>
                     <input type="text" id="projectTitle" placeholder="Project Name"/>
                     <input type="submit"/>
                 </form>
@@ -22,23 +22,30 @@
         </section>
         <section id="todosSection">
             <div>
-                <p>+ add new to-do +</p>
+                <p>+ Add New To-Do +</p>
                 <form id="newTodoForm">
                     <input type="text" placeholder="Title" id="fTitle" required/>
                     <input type="text" placeholder="Description" id="fDescription" required/>
                     <input type="date" id="fDate" required/>
-                    <fieldset>
-                        <legend>Priority level:</legend>
-                        <input type="radio" id="fLow" name="priority" value="low">
-                        <label for="fLow">Low</label><br>
-                        <input type="radio" id="fMedium" name="priority" value="medium">
-                        <label for="fMedium">Medium</label><br>
-                        <input type="radio" id="fHigh" name="priority" value="high">
-                        <label for="fHigh">High</label><br>
-                    </fieldset>
+                    <div id="fieldset-div">
+                        <fieldset>
+                            <legend>Priority:</legend>
+                            <input type="radio" id="fLow" name="priority" value="low">
+                            <label for="fLow">Low</label><br>
+                            <input type="radio" id="fMedium" name="priority" value="medium">
+                            <label for="fMedium">Medium</label><br>
+                            <input type="radio" id="fHigh" name="priority" value="high">
+                            <label for="fHigh">High</label><br>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Project</legend>
+                            <select name="Project" id="projectOption"></select>
+                        </fieldset>
+                    </div>
                     <input type="submit"/>
                 </form>
             </div>
+            <h4 id="project-name"></h4>
             <div id="newTodo"></div>
         </section>
     </main>
