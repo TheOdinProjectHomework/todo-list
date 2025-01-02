@@ -1,4 +1,6 @@
 import "./styles.css";
+import { Project, Todo } from "./modules/classes";
+import { projectCard } from "./modules/cards";
 
 console.log("Webpack is running: npx webpack serve");
 
@@ -8,65 +10,65 @@ let allTodos = [];
 let currentProject = 'default';
 
 // class module //
-class Project {
-    constructor(title, description) {
-        this._title = title;
-        this._description = description;
-        this._todos = [];
-    }
+// class Project {
+//     constructor(title, description) {
+//         this._title = title;
+//         this._description = description;
+//         this._todos = [];
+//     }
 
-    get title() {
-        return this._title;
-    }
+//     get title() {
+//         return this._title;
+//     }
 
-    get description() {
-        return this._description;
-    }
+//     get description() {
+//         return this._description;
+//     }
 
-    get todos() {
-        return this._todos;
-    }
+//     get todos() {
+//         return this._todos;
+//     }
 
-    addTodo (todo) {
-        this._todos.push(todo);
-    }
+//     addTodo (todo) {
+//         this._todos.push(todo);
+//     }
 
-    deleteTodo (todoToDelete) {
-        let updatedTodos = this._todos.filter(todo => todo !== todoToDelete);
-        this._todos = [...updatedTodos];
-    }
-}
+//     deleteTodo (todoToDelete) {
+//         let updatedTodos = this._todos.filter(todo => todo !== todoToDelete);
+//         this._todos = [...updatedTodos];
+//     }
+// }
 
-class Todo {
-    constructor(title, description, dueDate, priority, checklist) {
-        this._title = title;
-        this._description = description;
-        this._dueDate = dueDate;
-        this._priority = priority;
-        this._checklist = checklist;
-    }
+// class Todo {
+//     constructor(title, description, dueDate, priority, checklist) {
+//         this._title = title;
+//         this._description = description;
+//         this._dueDate = dueDate;
+//         this._priority = priority;
+//         this._checklist = checklist;
+//     }
 
-    get title() {
-        return this._title;
-    }
+//     get title() {
+//         return this._title;
+//     }
 
-    get description() {
-        return this._description;
-    }
+//     get description() {
+//         return this._description;
+//     }
 
-    get dueDate() {
-        return this._dueDate;
-    }
+//     get dueDate() {
+//         return this._dueDate;
+//     }
 
-    get priority() {
-        return this._priority;
-    }
+//     get priority() {
+//         return this._priority;
+//     }
 
-    get checklist() {
-        return this._checklist;
-    }
+//     get checklist() {
+//         return this._checklist;
+//     }
 
-}
+// }
 
 // dom module //
 const todoCard = (title, description, dueDate, priority) => {
@@ -126,14 +128,14 @@ const todoCard = (title, description, dueDate, priority) => {
     return divCard;
 }
 
-const projectCard = (title) => {
-    let divCard = document.createElement('div');
-    divCard.className = 'projectCard';
-    let titleP = document.createElement('p');
-    titleP.innerText = title;
-    divCard.appendChild(titleP);
-    return divCard;
-}
+// const projectCard = (title) => {
+//     let divCard = document.createElement('div');
+//     divCard.className = 'projectCard';
+//     let titleP = document.createElement('p');
+//     titleP.innerText = title;
+//     divCard.appendChild(titleP);
+//     return divCard;
+// }
 
 // object creation logic //
 let testProject = new Project('default', 'testing class');
