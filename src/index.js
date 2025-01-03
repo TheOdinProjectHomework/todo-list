@@ -90,11 +90,11 @@ const todoCard = (title, description, dueDate, priority) => {
     divCard.appendChild(checkBtn);
     divCard.appendChild(deleteBtn);
     if(priority === "low"){
-        divCard.style.border = "1px solid yellow";
+        divCard.style.border = "2px solid yellow";
     } else if(priority === "medium"){
-        divCard.style.border = "1px solid green";
+        divCard.style.border = "2px solid green";
     } else {
-        divCard.style.border = "1px solid red";
+        divCard.style.border = "2px solid red";
     }
     // check logic
     checkBtn.addEventListener("click", () => {
