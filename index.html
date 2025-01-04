@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Delicious+Handrawn&family=Electrolize&family=Parkinsans:wght@300..800&family=Playwrite+MX:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Sriracha&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+        rel="stylesheet">
+<script defer src="main.js"></script></head>
+<body>
+    <header>
+        <h1>To-do List Project</h1>
+    </header>
+    <main>
+        <section id="projectSection">
+            <div>
+                <form id="newProjectForm">
+                    <p>+ Add New Project +</p>
+                    <input type="text" id="projectTitle" placeholder="Project Name"/>
+                    <input type="submit"/>
+                </form>
+            </div>
+            <div id="projects"></div>
+        </section>
+        <section id="todosSection">
+            <div>
+                <p>+ Add New To-Do +</p>
+                <form id="newTodoForm">
+                    <input type="text" placeholder="Title" id="fTitle" required/>
+                    <input type="text" placeholder="Description" id="fDescription" required/>
+                    <input type="date" id="fDate" required/>
+                    <div id="fieldset-div">
+                        <fieldset>
+                            <legend>Priority:</legend>
+                            <input type="radio" id="fLow" name="priority" value="low">
+                            <label for="fLow">Low</label><br>
+                            <input type="radio" id="fMedium" name="priority" value="medium">
+                            <label for="fMedium">Medium</label><br>
+                            <input type="radio" id="fHigh" name="priority" value="high">
+                            <label for="fHigh">High</label><br>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Project</legend>
+                            <select name="Project" id="projectOption"></select>
+                        </fieldset>
+                    </div>
+                    <input type="submit"/>
+                </form>
+            </div>
+            <h4 id="project-name"></h4>
+            <div id="newTodo"></div>
+        </section>
+    </main>
+</body>
+</html>
